@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+
+
+
+    <View
+        android:id="@+id/backgroundOfRoom"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/background_of_room_template"
+        />
+
+    <TextView
+        android:id="@+id/lblNameOfRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/backgroundOfRoom"
+        android:layout_marginLeft="-230dp"
+        android:paddingBottom="6dp"
+        android:text="SoftHandTeam"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageOfRoom"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="-60dp"
+        android:layout_toLeftOf="@id/backgroundOfRoom"
+        android:src="@drawable/room_icon" />
+</RelativeLayout>

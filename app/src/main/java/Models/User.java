@@ -1,4 +1,4 @@
-package com.example.chattry;
+package Models;
 
 public class User {
     private static String nickname;

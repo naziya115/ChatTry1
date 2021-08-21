@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.chattry" >
+    package="com.example.chattry">
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ChatTry" >
+        android:theme="@style/Theme.ChatTry">
+        <activity
+            android:name=".ChatsListActivity"
+            android:exported="true" />
         <activity
             android:name=".RegistrationActivity"
             android:exported="true">
