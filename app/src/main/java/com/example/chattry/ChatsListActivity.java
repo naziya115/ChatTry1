@@ -2,7 +2,9 @@ package com.example.chattry;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,7 +35,13 @@ public class ChatsListActivity extends AppCompatActivity {
 
         createListView(this.roomsList);
 
-
+        addRoomFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),CreateGroupActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //метод нужен для проверки работы самого листвью и чтобы посмотреть, как выглядят мои шаблоны
