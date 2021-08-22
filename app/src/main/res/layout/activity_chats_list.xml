@@ -19,13 +19,14 @@
         android:id="@+id/addRoomFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:clickable="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/cross"
-        app:backgroundTint="@color/purple_500"
-        app:maxImageSize="40dp"
-        app:tint="@android:color/white" />
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/purple_500"
+        app:srcCompat="@drawable/ic_baseline_add_24"
+        tools:ignore="MissingConstraints" />
+
 
 </RelativeLayout>
