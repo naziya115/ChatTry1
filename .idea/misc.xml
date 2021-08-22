@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/zhana/AndroidStudioProjects/ChatTry/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
+        <entry key="..\:/Users/zhana/AndroidStudioProjects/ChatTry/app/src/main/res/layout/activity_create_group.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/zhana/AndroidStudioProjects/ChatTry/app/src/main/res/layout/activity_registration.xml" value="0.264" />
         <entry key="..\:/Users/zhana/AndroidStudioProjects/ChatTry/app/src/main/res/layout/registration.xml" value="0.11614583333333334" />
         <entry key="app/src/main/res/drawable/background_of_room_template.xml" value="0.24114583333333334" />

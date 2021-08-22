@@ -23,14 +23,13 @@
         android:id="@+id/nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:ems="10"
         android:hint="Enter nickname"
         android:inputType="textPersonName"
         android:textColor="@color/black"
         android:textSize="20dp"
-        android:textStyle="normal"
-        android:layout_centerInParent="true"
-       />
+        android:textStyle="normal" />
 
     <Button
         android:id="@+id/registerBtn"

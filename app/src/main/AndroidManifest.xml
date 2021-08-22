@@ -13,6 +13,9 @@
             android:name=".ChatsListActivity"
             android:exported="true" />
         <activity
+            android:name=".CreateGroupActivity"
+            android:exported="true" />
+        <activity
             android:name=".RegistrationActivity"
             android:exported="true">
             <intent-filter>
