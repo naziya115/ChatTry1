@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateRoomActivity">
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create a Room"
+        android:textColor="@color/purple_500"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:layout_above="@id/roomNameTxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="150dp"
+         />
+
+    <EditText
+        android:id="@+id/roomNameTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter group name"
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="normal"
+        android:layout_centerInParent="true"/>
+
+    <Button
+        android:id="@+id/addRoomBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add a group"
+        android:layout_below="@id/roomNameTxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        />
+</RelativeLayout>

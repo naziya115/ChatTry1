@@ -6,7 +6,7 @@ import io.socket.client.IO;
 import io.socket.client.Socket;
 
 public class SocketHandler {
-    private static Socket socket;
+    private static io.socket.client.Socket socket;
 
     private SocketHandler() {
     }

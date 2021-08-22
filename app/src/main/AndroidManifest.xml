@@ -16,7 +16,7 @@
             android:name=".ChatsListActivity"
             android:exported="true" />
         <activity
-            android:name=".CreateGroupActivity"
+            android:name=".CreateRoomActivity"
             android:exported="true" />
         <activity
             android:name=".RegistrationActivity"
