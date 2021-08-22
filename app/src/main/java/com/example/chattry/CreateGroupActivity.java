@@ -12,10 +12,18 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import Models.SocketHandler;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
+
 public class CreateGroupActivity extends AppCompatActivity {
     private TextView Title;
     private EditText groupName;
     private Button AddGroupBtn;
+    private Socket mSocket;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,17 +32,21 @@ public class CreateGroupActivity extends AppCompatActivity {
         groupName = findViewById(R.id.groupName);
         AddGroupBtn = findViewById(R.id.AddGroupBtn);
 
+
+
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "assets/font7.otf");
         Title.setTypeface(custom_font);
 
+        SocketHandler.establishConnection();
+        mSocket = SocketHandler.getSocket();
 
         AddGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isEditTextCorrect(groupName)){
-                    Snackbar.make(v,"Fill the field!", BaseTransientBottomBar.LENGTH_SHORT).show();
-                    return;
-                }
+                String groupStr = groupName.getText().toString();
+                mSocket.emit("groupDetection", groupStr);
+                groupName.setText("check!");
+
             }
         });
     }
