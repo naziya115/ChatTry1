@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+
 public class CreateGroupActivity extends AppCompatActivity {
     private TextView Title;
     private EditText groupName;
@@ -28,15 +31,20 @@ public class CreateGroupActivity extends AppCompatActivity {
         AddGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String groupNameStr = groupName.getText().toString();
-                if(groupNameStr!=null&&groupNameStr.length()!=0) {
-
-                }else{
-                    groupName.setError("Enter group name");
+                if(!isEditTextCorrect(groupName)){
+                    Snackbar.make(v,"Fill the field!", BaseTransientBottomBar.LENGTH_SHORT).show();
+                    return;
                 }
             }
         });
+    }
 
-
-}
+    public boolean isEditTextCorrect(EditText txt){
+        if(txt.getText().toString().isEmpty()
+                || txt.getText().toString() == null
+                || txt.getText().toString().trim() == ""){
+            return false;
+        }
+        return true;
+    }
 }

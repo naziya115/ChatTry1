@@ -23,9 +23,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
-
         android:src="@drawable/cross"
-
         app:backgroundTint="@color/purple_500"
         app:maxImageSize="40dp"
         app:tint="@android:color/white" />
