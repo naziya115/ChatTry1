@@ -55,7 +55,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         "New user has registered", Toast.LENGTH_SHORT);
                 toast.show();
 
-                //uyg
+
             }
         });
     }
