@@ -31,19 +31,24 @@ public class ChatsListActivity extends AppCompatActivity {
 
         initRoomsForTry();
 
-        RoomAdapter roomAdapter = new RoomAdapter(getApplicationContext(),R.layout.room_template,roomsList);
-
-        roomsListView.setAdapter(roomAdapter);
-
+        createListView(this.roomsList);
 
 
     }
 
+    //метод нужен для проверки работы самого листвью и чтобы посмотреть, как выглядят мои шаблоны
     public void initRoomsForTry(){
         for(int i=0;i<=10;i++){
             Room room = new Room();
             room.setRoomName("Room For Try");
             roomsList.add(room);
         }
+    }
+
+    public void createListView(ArrayList<Room> roomsList){
+        RoomAdapter roomAdapter = new RoomAdapter(getApplicationContext(),R.layout.room_template,roomsList);
+
+        roomsListView.setAdapter(roomAdapter);
+
     }
 }

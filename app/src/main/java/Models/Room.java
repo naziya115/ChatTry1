@@ -1,6 +1,7 @@
 package Models;
 
 public class Room {
+    //класс данных ;(
     private String roomName;
 
 

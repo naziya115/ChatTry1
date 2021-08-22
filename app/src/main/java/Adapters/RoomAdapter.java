@@ -31,6 +31,7 @@ public class RoomAdapter extends ArrayAdapter<Room> {
         this.rooms=rooms;
     }
 
+    //здесь мы устанавливаем название комнаты, которое берем из листа комнат
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
