@@ -67,9 +67,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
     public boolean isEditTextCorrect(EditText txt){
         if(txt.getText().toString().isEmpty()
-        || txt.getText().toString() == null
-        || txt.getText().toString().trim() == ""){
-           return false;
+                || txt.getText().toString() == null
+                || txt.getText().toString().trim() == ""){
+            return false;
         }
         return true;
     }
