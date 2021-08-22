@@ -40,7 +40,7 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(!isEditTextCorrect(nicknameTxt)){
-                    Snackbar.make(v,"Feel the field!", BaseTransientBottomBar.LENGTH_SHORT).show();
+                    Snackbar.make(v,"Fill the field!", BaseTransientBottomBar.LENGTH_SHORT).show();
                     return;
                 }
 
