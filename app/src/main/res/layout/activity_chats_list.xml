@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Oh.. Nothing here"
+        android:text="Oh.. Nothing yet"
         android:textSize="40dp"
         android:textColor="@color/purple_500"
         android:textStyle="bold"

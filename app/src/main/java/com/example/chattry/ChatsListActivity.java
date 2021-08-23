@@ -3,6 +3,7 @@ package com.example.chattry;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -112,6 +113,8 @@ public class ChatsListActivity extends AppCompatActivity {
 
     public void checkRoomsAndSetTextVisibility(){
         if(RoomsLists.getRooms().isEmpty()){
+            Typeface custom_font = Typeface.createFromAsset(getAssets(), "assets/font7.otf");
+            lblNothingHere.setTypeface(custom_font);
             lblNothingHere.setVisibility(View.VISIBLE);
             return;
         }
