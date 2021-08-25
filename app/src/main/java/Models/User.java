@@ -9,7 +9,7 @@ public class User {
         return nickname;
     }
 
-    public static void setNickname(String nickname) {
+    public  void setNickname(String nickname) {
         User.nickname = nickname;
     }
 }

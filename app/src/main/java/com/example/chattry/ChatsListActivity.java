@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -21,6 +21,7 @@ import Adapters.RoomAdapter;
 import Lists.RoomsLists;
 import Models.Room;
 import Models.SocketHandler;
+import Models.User;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
@@ -33,7 +34,7 @@ public class ChatsListActivity extends AppCompatActivity {
 
     TextView lblNothingHere;
 
-    private Socket mSocket;
+    Socket mSocket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +57,29 @@ public class ChatsListActivity extends AppCompatActivity {
 
         createListView(RoomsLists.getRooms());
 
-        checkRoomsAndSetTextVisibility();
+        setTextVisibilityByRooms();
 
         //послыает на активити добавления комнаты
         addRoomFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CreateRoomActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //листенер берет имя нажатого элемента и посылает эмит на сервер
+        roomsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedRoomName = RoomsLists.getRooms().get(position).getRoomName();
+                String userName = User.getNickname();
+
+                mSocket.emit("joinToRoomDetection", selectedRoomName, userName);
+
+                Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                intent.putExtra("roomName", selectedRoomName);
+
                 startActivity(intent);
             }
         });
@@ -88,7 +105,7 @@ public class ChatsListActivity extends AppCompatActivity {
                             roomAdapter.notifyDataSetChanged();
 
 
-                            checkRoomsAndSetTextVisibility();
+                            setTextVisibilityByRooms();
 
 
 
@@ -111,7 +128,7 @@ public class ChatsListActivity extends AppCompatActivity {
 
     }
 
-    public void checkRoomsAndSetTextVisibility(){
+    public void setTextVisibilityByRooms(){
         if(RoomsLists.getRooms().isEmpty()){
             Typeface custom_font = Typeface.createFromAsset(getAssets(), "assets/font7.otf");
             lblNothingHere.setTypeface(custom_font);
