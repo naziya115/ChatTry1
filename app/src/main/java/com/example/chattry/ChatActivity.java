@@ -78,6 +78,7 @@ public class ChatActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         mSocket.on("newUserOutOfRoom", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
@@ -87,12 +88,12 @@ public class ChatActivity extends AppCompatActivity {
                     public void run() {
                         JSONObject data = (JSONObject) args[0];
                         try {
-                            //создаем сообщение коннекта
+                            //создаем сообщение дисконнекта
                             String userName = data.getString("userName");
-                            String connectionContent = userName + " has disconnected!";
-                            Message connectionMessage = new Message(2, userName, connectionContent);
+                            String disconnectionContent = userName + " has disconnected!";
+                            Message disconnectionMessage = new Message(2, userName, disconnectionContent);
 
-                            messagesList.add(connectionMessage);
+                            messagesList.add(disconnectionMessage);
 
                             //эта штука позволяет появляеться сообщениям снизу
                             //учитывая, что сам recycler растянут match_parent
