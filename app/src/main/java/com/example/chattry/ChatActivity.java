@@ -65,46 +65,60 @@ public class ChatActivity extends AppCompatActivity {
         setRecyclerOfMessages();
 
 
-        //пока просто посылает в ChatsListActivity
+        //отправляет message в чат о юзере, который дисконнектнулся, далее посылает в ChatsListActivity
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ChatsListActivity.class);
+                User user = new User();
+                //создаем сообщение дисконнекта
+                String userName = user.getNickname();
+                String disconnectionContent = userName + " has disconnected!";
+                Message connectionMessage = new Message(2, userName, disconnectionContent);
+
+                messagesList.add(connectionMessage);
+
+                mSocket.emit("leaveRoomDetection", lblOfRoom.getText().toString(), userName);
+
+                //эта штука позволяет появляться сообщениям снизу
+                //учитывая, что сам recycler растянут match_parent
+                recyclerOfMessages.scrollToPosition(messagesList.size() - 1);
+
+                messageAdapter.notifyDataSetChanged();
+                Intent intent = new Intent(getApplicationContext(), ChatsListActivity.class);
                 startActivity(intent);
             }
         });
-
-        mSocket.on("newUserInRoom", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-
-                runOnUiThread(new Runnable() {
+                mSocket.on("newUserInRoom", new Emitter.Listener() {
                     @Override
-                    public void run() {
-                        JSONObject data = (JSONObject) args[0];
-                        try {
-                            //создаем сообщение коннекта
-                            String userName = data.getString("userName");
-                            String connectionContent = userName + " has connected!";
-                            Message connectionMessage = new Message(2,userName,connectionContent);
+                    public void call(Object... args) {
 
-                            messagesList.add(connectionMessage);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                JSONObject data = (JSONObject) args[0];
+                                try {
+                                    //создаем сообщение коннекта
+                                    String userName = data.getString("userName");
+                                    String connectionContent = userName + " has connected!";
+                                    Message connectionMessage = new Message(2, userName, connectionContent);
 
-                            //эта штука позволяет появляеться сообщениям снизу
-                            //учитывая, что сам recycler растянут match_parent
-                            recyclerOfMessages.scrollToPosition(messagesList.size()-1);
+                                    messagesList.add(connectionMessage);
 
-                            messageAdapter.notifyDataSetChanged();
+                                    //эта штука позволяет появляеться сообщениям снизу
+                                    //учитывая, что сам recycler растянут match_parent
+                                    recyclerOfMessages.scrollToPosition(messagesList.size() - 1);
+
+                                    messageAdapter.notifyDataSetChanged();
 
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
 
+                            }
+                        });
                     }
                 });
-            }
-        });
 
     }
 

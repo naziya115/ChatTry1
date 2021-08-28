@@ -8,19 +8,16 @@
     tools:context=".ChatActivity">
 
 
-
-
-
     <RelativeLayout
         android:id="@+id/barContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <View
             android:id="@+id/backgroundOfChatBar"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@color/smooth_gray"
-            />
+            android:background="@color/smooth_gray" />
 
         <TextView
             android:id="@+id/lblOfRoom"
@@ -54,7 +51,6 @@
 
         android:padding="10dp"
 
-        android:background="@color/gray"
         >
 
         <EditText
