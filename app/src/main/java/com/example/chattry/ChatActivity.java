@@ -64,7 +64,6 @@ public class ChatActivity extends AppCompatActivity {
 
         setRecyclerOfMessages();
 
-
         //отправляет message в чат о юзере, который дисконнектнулся, далее посылает в ChatsListActivity
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
