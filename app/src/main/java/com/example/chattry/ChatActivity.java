@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -68,23 +71,41 @@ public class ChatActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user = new User();
-                //создаем сообщение дисконнекта
-                String userName = user.getNickname();
-                String disconnectionContent = userName + " has disconnected!";
-                Message connectionMessage = new Message(2, userName, disconnectionContent);
-
-                messagesList.add(connectionMessage);
-
+                String userName = User.getNickname();
                 mSocket.emit("leaveRoomDetection", lblOfRoom.getText().toString(), userName);
 
-                //эта штука позволяет появляться сообщениям снизу
-                //учитывая, что сам recycler растянут match_parent
-                recyclerOfMessages.scrollToPosition(messagesList.size() - 1);
-
-                messageAdapter.notifyDataSetChanged();
                 Intent intent = new Intent(getApplicationContext(), ChatsListActivity.class);
                 startActivity(intent);
+            }
+        });
+        mSocket.on("newUserOutOfRoom", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        JSONObject data = (JSONObject) args[0];
+                        try {
+                            //создаем сообщение коннекта
+                            String userName = data.getString("userName");
+                            String connectionContent = userName + " has disconnected!";
+                            Message connectionMessage = new Message(2, userName, connectionContent);
+
+                            messagesList.add(connectionMessage);
+
+                            //эта штука позволяет появляеться сообщениям снизу
+                            //учитывая, что сам recycler растянут match_parent
+                            recyclerOfMessages.scrollToPosition(messagesList.size() - 1);
+
+                            messageAdapter.notifyDataSetChanged();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
             }
         });
                 mSocket.on("newUserInRoom", new Emitter.Listener() {
