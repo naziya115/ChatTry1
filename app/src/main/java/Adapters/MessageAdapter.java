@@ -20,6 +20,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     //это интовый флаг для типа сообщения
     public static final int CONNECTION_MESSAGE = 2;
+    public static final int DISCONNECTION_MESSAGE = 1;
 
     public MessageAdapter(Context context, ArrayList<Message> messagesList) {
         this.context = context;
@@ -42,20 +43,39 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 
+    //этот класс нужен для сета сообщения дисконекта в recycler-е
+    private class MessageDisconnectionViewHolder extends RecyclerView.ViewHolder {
+
+        TextView lblDisconnectionMessage;
+        MessageDisconnectionViewHolder(final View itemView) {
+            super(itemView);
+            lblDisconnectionMessage = itemView.findViewById(R.id.lblDisconnectionMessage);
+
+        }
+        void bind(int position) {
+            Message message = messagesList.get(position);
+            lblDisconnectionMessage.setText(message.getContent());
+        }
+    }
+
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == CONNECTION_MESSAGE) {
             return new MessageConnectionViewHolder(LayoutInflater.from(context).inflate(R.layout.connection_message_template, parent, false));
         }
-        //УБЕРИТЕ НУЛЛ. МЕТОД НЕ В КОЕМ СЛУЧАЕ НЕ ДОЛЖЕН ЕГО ВОЗВРАЩАТЬ. КОГДА БУДЕТЕ ЗАКАНЧИВАТЬ УБЕРИТЕ!!
-        return null;
+
+        //тут возвращаем вью сообщения дисконекта
+        return new MessageDisconnectionViewHolder(LayoutInflater.from(context).inflate(R.layout.disconnection_template, parent, false));
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (messagesList.get(position).getType() == CONNECTION_MESSAGE) {
             ((MessageConnectionViewHolder) holder).bind(position);
+        }else if(messagesList.get(position).getType() == DISCONNECTION_MESSAGE){
+            ((MessageDisconnectionViewHolder) holder).bind(position);
         }
     }
 

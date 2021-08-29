@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/drawable/background_of_room_template.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/drawable/conncetion_message_background.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/drawable/cross.xml" value="0.24114583333333334" />
+        <entry key="app/src/main/res/drawable/disconnection_message_background.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/drawable/listview_members_background.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/drawable/message_field_background.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.25" />
@@ -19,6 +20,7 @@
         <entry key="app/src/main/res/layout/activity_create_group.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_registration.xml" value="0.25" />
         <entry key="app/src/main/res/layout/connection_message_template.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/disconnection_template.xml" value="0.25" />
         <entry key="app/src/main/res/layout/member_template.xml" value="0.165" />
         <entry key="app/src/main/res/layout/my_message_template.xml" value="0.11956521739130435" />
         <entry key="app/src/main/res/layout/outer_message_temaplate.xml" value="0.11956521739130435" />

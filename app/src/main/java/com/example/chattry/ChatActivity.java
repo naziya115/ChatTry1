@@ -91,7 +91,7 @@ public class ChatActivity extends AppCompatActivity {
                             //создаем сообщение дисконнекта
                             String userName = data.getString("userName");
                             String disconnectionContent = userName + " has disconnected!";
-                            Message disconnectionMessage = new Message(2, userName, disconnectionContent);
+                            Message disconnectionMessage = new Message(1, userName, disconnectionContent);
 
                             messagesList.add(disconnectionMessage);
 
