@@ -4,11 +4,19 @@ public class Message {
     private int type;
     private String senderName;
     private String content;
+    private String timeStr;
 
     public Message(int type, String senderName, String content) {
         this.type = type;
         this.senderName = senderName;
         this.content = content;
+    }
+
+    public Message(int type, String senderName, String content,String time) {
+        this.type = type;
+        this.senderName = senderName;
+        this.content = content;
+        this.timeStr = time;
     }
 
     public int getType() {
@@ -33,5 +41,13 @@ public class Message {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getTimeStr() {
+        return timeStr;
+    }
+
+    public void setTimeStr(String timeStr) {
+        this.timeStr = timeStr;
     }
 }

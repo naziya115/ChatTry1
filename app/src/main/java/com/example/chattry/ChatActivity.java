@@ -1,10 +1,12 @@
 package com.example.chattry;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -17,9 +19,12 @@ import com.google.android.material.snackbar.Snackbar;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import Adapters.MessageAdapter;
+import Lists.RoomsLists;
 import Models.Message;
 import Models.SocketHandler;
 import Models.User;
@@ -79,6 +84,81 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+        sendBtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+                String messageStr = txtMessage.getText().toString();
+                //валидация строки сообщения
+                if(messageStr.isEmpty() ||
+                        messageStr.replaceAll(" ","") == "" || messageStr.equals(null)){
+                    return;
+                }
+
+                //создали свое сообщение и добавили его в лист для себя
+                String userName = User.getNickname();
+
+                LocalTime time = LocalTime.now();
+                String timeStr = time.format(DateTimeFormatter.ofPattern("HH:mm"));
+
+                Message myMessage = new Message(3,userName,messageStr,timeStr);
+
+
+                messagesList.add(myMessage);
+
+                //эта штука позволяет появляеться сообщениям снизу
+                //учитывая, что сам recycler растянут match_parent
+                recyclerOfMessages.scrollToPosition(messagesList.size() - 1);
+
+                messageAdapter.notifyDataSetChanged();
+
+                //очищаем поле ввода
+                txtMessage.setText("");
+
+                //отправляем сообщение на сокет
+
+                String roomName = lblOfRoom.getText().toString();
+
+                mSocket.emit("messageDetection",roomName , userName,messageStr,timeStr);
+
+
+
+            }
+        });
+        mSocket.on("outerMessageReceived", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        JSONObject data = (JSONObject) args[0];
+                        try {
+                            //создаем сообщение дисконнекта
+                            String senderName = data.getString("senderName");
+                            String messageStr = data.getString("messageStr");
+                            String time = data.getString("time");
+
+
+
+                            Message outerMessage = new Message(4,senderName,messageStr,time);
+
+                            messagesList.add(outerMessage);
+
+                            //эта штука позволяет появляеться сообщениям снизу
+                            //учитывая, что сам recycler растянут match_parent
+                            recyclerOfMessages.scrollToPosition(messagesList.size() - 1);
+
+                            messageAdapter.notifyDataSetChanged();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+            }
+        });
         mSocket.on("newUserOutOfRoom", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
@@ -109,41 +189,38 @@ public class ChatActivity extends AppCompatActivity {
                 });
             }
         });
-                mSocket.on("newUserInRoom", new Emitter.Listener() {
+        mSocket.on("newUserInRoom", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void call(Object... args) {
+                    public void run() {
+                        JSONObject data = (JSONObject) args[0];
+                        try {
+                            //создаем сообщение коннекта
+                            String userName = data.getString("userName");
+                            String connectionContent = userName + " has connected!";
+                            Message connectionMessage = new Message(2, userName, connectionContent);
 
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                JSONObject data = (JSONObject) args[0];
-                                try {
-                                    //создаем сообщение коннекта
-                                    String userName = data.getString("userName");
-                                    String connectionContent = userName + " has connected!";
-                                    Message connectionMessage = new Message(2, userName, connectionContent);
+                            messagesList.add(connectionMessage);
 
-                                    messagesList.add(connectionMessage);
-
-                                    //эта штука позволяет появляеться сообщениям снизу
-                                    //учитывая, что сам recycler растянут match_parent
-                                    recyclerOfMessages.scrollToPosition(messagesList.size() - 1);
-
-                                    messageAdapter.notifyDataSetChanged();
+                            //эта штука позволяет появляеться сообщениям снизу
+                            //учитывая, что сам recycler растянут match_parent
+                            recyclerOfMessages.scrollToPosition(messagesList.size() - 1);
+                            messageAdapter.notifyDataSetChanged();
 
 
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-                            }
-                        });
                     }
                 });
+            }
+        });
 
     }
-
-
 
 
     public void setLblOfRoom(){
