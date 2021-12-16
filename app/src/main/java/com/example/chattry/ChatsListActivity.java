@@ -55,6 +55,7 @@ public class ChatsListActivity extends AppCompatActivity {
 
 
 
+        //работа с комнатами до жтой строчки
         createListView(RoomsLists.getRooms());
 
         setTextVisibilityByRooms();

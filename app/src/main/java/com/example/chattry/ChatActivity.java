@@ -62,7 +62,11 @@ public class ChatActivity extends AppCompatActivity {
 
 
         recyclerOfMessages = findViewById(R.id.recycler_of_messages);
+
+        //после этого надо только заполнить лист, больше ничего не надо
         messagesList = new ArrayList<>();
+
+
 
 
 
