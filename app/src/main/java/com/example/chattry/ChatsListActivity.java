@@ -36,8 +36,6 @@ public class ChatsListActivity extends AppCompatActivity {
     TextView lblNothingHere;
 
     Socket mSocket;
-
-    MyDatabaseRoomHelper myDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,15 +52,6 @@ public class ChatsListActivity extends AppCompatActivity {
         //подключаемся к сокету и получаем его
         SocketHandler.establishConnection();
         mSocket = SocketHandler.getSocket();
-
-
-
-
-        myDB = new MyDatabaseRoomHelper(ChatsListActivity.this);
-        // очищаю ArrayList, чтобы ничего не дублировалось
-        RoomsLists.init();
-        // беру rooms с бд
-        storeDataInArrays();
 
         //работа с комнатами до этой строчки
         createListView(RoomsLists.getRooms());
@@ -146,17 +135,6 @@ public class ChatsListActivity extends AppCompatActivity {
             return;
         }
         lblNothingHere.setVisibility(View.GONE);
-    }
-
-    //для высвечивания rooms, которые есть в бд
-    void storeDataInArrays(){
-        Cursor cursor = myDB.readAllData();
-        if(cursor!=null&&cursor.getCount()!=0) {
-            while (cursor.moveToNext()) {
-                Room room = new Room(cursor.getString(1));
-                RoomsLists.addRoom(room);
-            }
-        }
     }
 
 }

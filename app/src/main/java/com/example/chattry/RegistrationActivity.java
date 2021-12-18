@@ -3,6 +3,7 @@ package com.example.chattry;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
+import Lists.RoomsLists;
+import Models.Room;
 import Models.User;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -21,6 +24,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText nicknameTxt;
     private Button registerBtn;
     private User user = new User();
+    MyDatabaseRoomHelper myDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +33,8 @@ public class RegistrationActivity extends AppCompatActivity {
         AppTitle = findViewById(R.id.AppTitle);
         nicknameTxt = findViewById(R.id.nickname);
         registerBtn = findViewById(R.id.registerBtn);
+
+        myDB = new MyDatabaseRoomHelper(RegistrationActivity.this);
 
         //Устанавливаем шрифт чтобы было по красоте
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "assets/font7.otf");
@@ -55,7 +61,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         "New user has registered", Toast.LENGTH_SHORT);
                 toast.show();
 
-
+                storeDataInArrays();
             }
         });
     }
@@ -72,5 +78,16 @@ public class RegistrationActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    //для высвечивания rooms, которые есть в бд
+    void storeDataInArrays(){
+        Cursor cursor = myDB.readAllData();
+        if(cursor!=null&&cursor.getCount()!=0) {
+            while (cursor.moveToNext()) {
+                Room room = new Room(cursor.getString(1));
+                RoomsLists.addRoom(room);
+            }
+        }
     }
 }
