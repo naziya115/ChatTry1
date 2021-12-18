@@ -2,6 +2,7 @@ package Models;
 
 public class Message {
     private int type;
+    private String roomName;
     private String senderName;
     private String content;
     private String timeStr;
@@ -17,6 +18,17 @@ public class Message {
         this.senderName = senderName;
         this.content = content;
         this.timeStr = time;
+    }
+
+    public Message(int type, String roomName, String senderName, String content, String timeStr) {
+        this.type = type;
+        this.roomName = roomName;
+        this.senderName = senderName;
+        this.content = content;
+        this.timeStr = timeStr;
+    }
+
+    public Message() {
     }
 
     public int getType() {

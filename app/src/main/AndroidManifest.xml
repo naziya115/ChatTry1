@@ -13,14 +13,19 @@
         android:theme="@style/Theme.ChatTry"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".MyDatabaseRoomHelper"
+            android:exported="true" />
+        <activity
+            android:name=".MyDatabaseMessageHelper"
+            android:exported="true" />
+        <activity
             android:name=".ChatActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ChatsListActivity"
-            android:exported="true"
-            />
+            android:exported="true" />
         <activity
             android:name=".CreateRoomActivity"
             android:exported="true" />

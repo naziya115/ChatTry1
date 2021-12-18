@@ -5,10 +5,12 @@
       <map>
         <entry key="..\:/Users/zhana/AndroidStudioProjects/ChatTry/app/src/main/res/drawable/back_btn.xml" value="0.2546875" />
         <entry key="..\:/Users/zhana/AndroidStudioProjects/ChatTry/app/src/main/res/drawable/conncetion_message_background.xml" value="0.2546875" />
-        <entry key="..\:/Users/zhana/AndroidStudioProjects/ChatTry/app/src/main/res/layout/activity_chat.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/zhana/AndroidStudioProjects/ChatTry/app/src/main/res/layout/activity_chats_list.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/zhana/AndroidStudioProjects/ChatTry/app/src/main/res/layout/activity_chat.xml" value="0.22" />
+        <entry key="..\:/Users/zhana/AndroidStudioProjects/ChatTry/app/src/main/res/layout/activity_chats_list.xml" value="0.176" />
         <entry key="..\:/Users/zhana/AndroidStudioProjects/ChatTry/app/src/main/res/layout/activity_registration.xml" value="0.264" />
+        <entry key="..\:/Users/zhana/AndroidStudioProjects/ChatTry/app/src/main/res/layout/outer_message_temaplate.xml" value="0.264" />
         <entry key="..\:/Users/zhana/AndroidStudioProjects/ChatTry/app/src/main/res/layout/registration.xml" value="0.11614583333333334" />
+        <entry key="..\:/Users/zhana/AndroidStudioProjects/ChatTry/app/src/main/res/layout/room_template.xml" value="0.14814814814814814" />
         <entry key="app/src/main/res/drawable/background_of_room_template.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/drawable/conncetion_message_background.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/drawable/cross.xml" value="0.24114583333333334" />

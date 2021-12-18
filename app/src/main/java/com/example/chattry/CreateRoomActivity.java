@@ -23,6 +23,7 @@ public class CreateRoomActivity extends AppCompatActivity {
     private EditText roomNameTxt;
     private Button addRoomBtn;
     private Socket mSocket;
+    private String roomStr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +50,7 @@ public class CreateRoomActivity extends AppCompatActivity {
                     return;
                 }
 
-                String roomStr = roomNameTxt.getText().toString();
+                roomStr = roomNameTxt.getText().toString();
                 mSocket.emit("roomDetection", roomStr);
 
 
@@ -61,6 +62,10 @@ public class CreateRoomActivity extends AppCompatActivity {
                 Room room = new Room();
                 room.setRoomName(roomStr);
                 RoomsLists.addRoom(room);
+
+                //adding room to database
+                MyDatabaseRoomHelper myDB = new MyDatabaseRoomHelper(CreateRoomActivity.this);
+                myDB.AddRoom(room.getRoomName());
 
                 startActivity(intent);
 

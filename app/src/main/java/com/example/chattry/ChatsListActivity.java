@@ -3,6 +3,7 @@ package com.example.chattry;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -36,6 +37,7 @@ public class ChatsListActivity extends AppCompatActivity {
 
     Socket mSocket;
 
+    MyDatabaseRoomHelper myDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +57,19 @@ public class ChatsListActivity extends AppCompatActivity {
 
 
 
-        //работа с комнатами до жтой строчки
+
+        myDB = new MyDatabaseRoomHelper(ChatsListActivity.this);
+        // очищаю ArrayList, чтобы ничего не дублировалось
+        RoomsLists.init();
+        // беру rooms с бд
+        storeDataInArrays();
+
+        //работа с комнатами до этой строчки
         createListView(RoomsLists.getRooms());
 
         setTextVisibilityByRooms();
 
-        //послыает на активити добавления комнаты
+        //посылает на активити добавления комнаты
         addRoomFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +111,7 @@ public class ChatsListActivity extends AppCompatActivity {
                             Room room = new Room();
                             room.setRoomName(groupName);
 
-                            RoomsLists.addRoom(room);
+                           RoomsLists.addRoom(room);
                             roomAdapter.notifyDataSetChanged();
 
 
@@ -139,6 +148,15 @@ public class ChatsListActivity extends AppCompatActivity {
         lblNothingHere.setVisibility(View.GONE);
     }
 
-
+    //для высвечивания rooms, которые есть в бд
+    void storeDataInArrays(){
+        Cursor cursor = myDB.readAllData();
+        if(cursor!=null&&cursor.getCount()!=0) {
+            while (cursor.moveToNext()) {
+                Room room = new Room(cursor.getString(1));
+                RoomsLists.addRoom(room);
+            }
+        }
+    }
 
 }

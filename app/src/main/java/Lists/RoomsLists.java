@@ -9,6 +9,11 @@ import Models.Room;
 public class RoomsLists {
     private static final ArrayList<Room> rooms = new ArrayList<>();
 
+    public static void init() {
+        rooms.clear();
+
+    }
+
     private RoomsLists() {
     }
 
@@ -18,4 +23,5 @@ public class RoomsLists {
     public static void addRoom(Room room) {
         rooms.add(room);
     }
+
 }
