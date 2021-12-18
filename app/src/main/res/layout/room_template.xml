@@ -6,6 +6,13 @@
     android:padding="20dp">
 
 
+    <View
+        android:id="@+id/backgroundOfRoom"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/background_of_room_template" />
+
+
     <ImageView
         android:id="@+id/imageOfRoom"
         android:layout_width="50dp"
@@ -30,18 +37,6 @@
             android:textColor="@color/black"
             android:textSize="30dp"
             android:textStyle="bold" />
-
-        <View
-            android:id="@+id/backgroundOfRoom"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/background_of_room_template" />
     </RelativeLayout>
-
-
-
-
-
-
 
 </RelativeLayout>

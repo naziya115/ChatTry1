@@ -122,7 +122,6 @@ public class ChatsListActivity extends AppCompatActivity {
 
     public void createListView(ArrayList<Room> roomsList){
         roomAdapter = new RoomAdapter(getApplicationContext(),R.layout.room_template,roomsList);
-
         roomsListView.setAdapter(roomAdapter);
 
     }
