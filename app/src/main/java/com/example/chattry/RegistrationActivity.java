@@ -53,6 +53,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 user.setNickname(nicknameTxt.getText().toString());
 
                 clearEditText(nicknameTxt);
+                storeDataInArrays();
 
                 Intent intent = new Intent(getApplicationContext(),ChatsListActivity.class);
                 startActivity(intent);
@@ -60,8 +61,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "New user has registered", Toast.LENGTH_SHORT);
                 toast.show();
-
-                storeDataInArrays();
             }
         });
     }

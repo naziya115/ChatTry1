@@ -61,11 +61,11 @@ public class CreateRoomActivity extends AppCompatActivity {
 
                 Room room = new Room();
                 room.setRoomName(roomStr);
-                RoomsLists.addRoom(room);
-
                 //adding room to database
                 MyDatabaseRoomHelper myDB = new MyDatabaseRoomHelper(CreateRoomActivity.this);
                 myDB.AddRoom(room.getRoomName());
+
+                RoomsLists.addRoom(room);
 
                 startActivity(intent);
 

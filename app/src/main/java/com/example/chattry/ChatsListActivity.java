@@ -36,18 +36,20 @@ public class ChatsListActivity extends AppCompatActivity {
     TextView lblNothingHere;
 
     Socket mSocket;
+    MyDatabaseRoomHelper myDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chats_list);
 
-        roomsListView=findViewById(R.id.roomsListView);
+        roomsListView = findViewById(R.id.roomsListView);
 
-        addRoomFAB=findViewById(R.id.addRoomFAB);
-
+        addRoomFAB = findViewById(R.id.addRoomFAB);
 
 
         lblNothingHere = findViewById(R.id.lblNothingHere);
+        myDB = new MyDatabaseRoomHelper(ChatsListActivity.this);
 
         //подключаемся к сокету и получаем его
         SocketHandler.establishConnection();
@@ -99,13 +101,15 @@ public class ChatsListActivity extends AppCompatActivity {
                             String groupName = data.getString("roomName");
                             Room room = new Room();
                             room.setRoomName(groupName);
+                            //adding room to database
+                            MyDatabaseRoomHelper myDB = new MyDatabaseRoomHelper(ChatsListActivity.this);
+                            myDB.AddRoom(room.getRoomName());
 
-                           RoomsLists.addRoom(room);
+                            RoomsLists.addRoom(room);
                             roomAdapter.notifyDataSetChanged();
 
 
                             setTextVisibilityByRooms();
-
 
 
                         } catch (JSONException e) {
@@ -119,15 +123,14 @@ public class ChatsListActivity extends AppCompatActivity {
     }
 
 
-
-    public void createListView(ArrayList<Room> roomsList){
-        roomAdapter = new RoomAdapter(getApplicationContext(),R.layout.room_template,roomsList);
+    public void createListView(ArrayList<Room> roomsList) {
+        roomAdapter = new RoomAdapter(getApplicationContext(), R.layout.room_template, roomsList);
         roomsListView.setAdapter(roomAdapter);
 
     }
 
-    public void setTextVisibilityByRooms(){
-        if(RoomsLists.getRooms().isEmpty()){
+    public void setTextVisibilityByRooms() {
+        if (RoomsLists.getRooms().isEmpty()) {
             Typeface custom_font = Typeface.createFromAsset(getAssets(), "assets/font7.otf");
             lblNothingHere.setTypeface(custom_font);
             lblNothingHere.setVisibility(View.VISIBLE);
